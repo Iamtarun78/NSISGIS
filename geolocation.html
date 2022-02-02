@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Geolocation</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script
+        src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        #map {
+            height:70vh;
+            width: 100%;
+        }
+        .details{
+            padding:10px;
+            background-color: whitesmoke;
+            text-align: center;
+        }
+        #trackBtn{
+            padding: 20px;
+            font-size: large;
+        }
+        #accuracy{
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" class="map"></div><br>
+    <div class='details'><button id="trackBtn">Goto my current location</button><br><h1>position accuracy : <code id="accuracy"></code></h1></div>
+    
+    </div>
+    <script>
+        var view = new ol.View({
+            center: [0, 0],
+            zoom: 5
+        });
+
+        var map = new ol.Map({
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            target: 'map',
+            controls: ol.control.defaults({
+                attributionOptions: {
+                    collapsible: false
+                }
+            }),
+            view: view
+        });
+
+        var geolocation = new ol.Geolocation({
+            projection: view.getProjection()
+        });
+
+        $("#trackBtn").click(function () {
+            alert("Firing")
+            geolocation.setTracking(true);
+        })
+
+        // update the HTML page when the position changes.
+        geolocation.on('change', function () {
+            console.log("changing.....")
+            $("#accuracy").html(geolocation.getAccuracy() + ' [m]');
+        });
+
+        // handle geolocation error.
+        geolocation.on('error', function (error) {
+            var info = document.getElementById('info');
+            info.innerHTML = error.message;
+            info.style.display = '';
+        });
+
+        var accuracyFeature = new ol.Feature();
+        geolocation.on('change:accuracyGeometry', function () {
+            accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+        });
+
+        var positionFeature = new ol.Feature();
+        positionFeature.setStyle(new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({
+                    color: '#3399CC'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            })
+        }));
+
+        geolocation.on('change:position', function () {
+            var coordinates = geolocation.getPosition();
+            positionFeature.setGeometry(coordinates ?
+                new ol.geom.Point(coordinates) : null);
+            map.getView().animate({
+                center: coordinates,
+                duration: 2000,
+                zoom: 14
+            });
+        });
+
+        new ol.layer.Vector({
+            map: map,
+            source: new ol.source.Vector({
+                features: [accuracyFeature, positionFeature]
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+[
+    {
+        "id": "1",
+        "type": "region",
+        "region": "Amhara",
+        "soil_type": "K",
+        "workspace": "NSISGIS",
+        "storename": "K_02232021105053",
+        "layername": "NSISGIS:amhara_k",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "2",
+        "type": "region",
+        "region": "Amhara",
+        "soil_type": "PH",
+        "workspace": "NSISGIS",
+        "storename": "PH_02232021105053",
+        "layername": "NSISGIS:amhara_ph",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "3",
+        "type": "region",
+        "region": "Amhara",
+        "soil_type": "OC",
+        "workspace": "NSISGIS",
+        "storename": "OC_02232021105053",
+        "layername": "NSISGIS:amhara_oc",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "4",
+        "type": "country",  
+        "region": "",
+        "soil_type": "K",
+        "workspace": "NSISGIS",
+        "storename": "K_02232021105053",
+        "layername": "NSISGIS:ethiopia_k",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "5",
+        "type": "country",
+        "region": "",
+        "soil_type": "PH",
+        "workspace": "NSISGIS",
+        "storename": "PH_02232021105053",
+        "layername": "NSISGIS:ethiopia_ph",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "6",
+        "type": "country",
+        "region": "",
+        "soil_type": "OC",
+        "workspace": "NSISGIS",
+        "storename": "OC_02232021105053",
+        "layername": "NSISGIS:ethiopia_oc",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "7",
+        "type": "region",
+        "region": "Gambella",
+        "soil_type": "K",
+        "workspace": "NSISGIS",
+        "storename": "K_02232021105053",
+        "layername": "NSISGIS:Gambella_k",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "8",
+        "type": "region",
+        "region": "Gambella",
+        "soil_type": "B",
+        "workspace": "NSISGIS",
+        "storename": "C_02232021105053",
+        "layername": "NSISGIS:Gambella_b",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "9",
+        "type": "region",
+        "region": "Gambella",
+        "soil_type": "CA",
+        "workspace": "NSISGIS",
+        "storename": "CA_02232021105053",
+        "layername": "NSISGIS:Gambella_ca",
+        "minmax": ".024/5.45"
+    }
+]

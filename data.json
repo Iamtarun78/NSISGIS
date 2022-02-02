@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "type": "Country/region",
+        "region": "Amhara",
+        "soil_type": "K",
+        "workspace": "NSISGIS",
+        "storename": "K_02232021105053",
+        "layername": "NSISGIS:amhara_k",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "2",
+        "type": "Country/region",
+        "region": "Amhara",
+        "soil_type": "PH",
+        "workspace": "NSISGIS",
+        "storename": "PH_02232021105053",
+        "layername": "NSISGIS:amhara_ph",
+        "minmax": ".024/5.45"
+    },
+    {
+        "id": "3",
+        "type": "Country/region",
+        "region": "Amhara",
+        "soil_type": "OC",
+        "workspace": "NSISGIS",
+        "storename": "OC_02232021105053",
+        "layername": "NSISGIS:amhara_oc",
+        "minmax": ".024/5.45"
+    }
+]

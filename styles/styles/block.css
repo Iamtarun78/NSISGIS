@@ -1,0 +1,14 @@
+/* @title Boundaries */
+* {
+   stroke: blue; 
+   stroke-opacity: 0.6;
+   fill: lightgrey;
+   fill-opacity: 0.7;   
+   font-family: "Verdana";
+   font-size: 12;
+  fill : mark;
+}
+[@scale<752000]
+{
+   label:[name];
+}

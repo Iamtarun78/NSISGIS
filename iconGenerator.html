@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Generator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #resultImg {
+            height: 30px;
+            width: 32px;
+        }
+
+        .icons {
+            padding: 10px;
+        }
+
+        #icongen,
+        #legendgen {
+            padding: 5px 10px;
+            border: 1px solid gray;
+            box-shadow: -2px 2px 0px gray;
+            color: white;
+            font-size: 15px;
+        }
+
+        #icongen {
+            background-color: rgb(208, 151, 9);
+        }
+
+        #legendgen {
+            background-color: rgb(168, 30, 181);
+        }
+
+        #icongen:hover {
+            background-color: rgb(243, 182, 26);
+            cursor: pointer;
+        }
+
+        #legendgen:hover {
+            background-color: rgb(212, 22, 230);
+            cursor: pointer;
+        }
+
+        #icongen:focus,
+        #legendgen:focus {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="legend" width="32" height="30"></canvas>
+    <div style="display: inline-block;float:right;">
+        <button id="icongen" onclick='downloadIcon();'>Generate Icon</button>
+        <button id="legendgen" onclick='generateLegendValue();'>Generate Legend Value</button>
+    </div>
+
+
+
+
+    <div>
+        <ColorMapEntry quantity="3.617508970089" label="3.617508970089" color="#fedaa8" />
+        <ColorMapEntry quantity="4.481670435234" label="4.481670435234" color="#fed49b" />
+        <ColorMapEntry quantity="4.913762186058" label="4.913762186058" color="#fed195" />
+        <ColorMapEntry quantity="5.345853936882" label="5.345853936882" color="#fece8f" />
+        <ColorMapEntry quantity="5.777945687706" label="5.777945687706" color="#fdcb89" />
+        <ColorMapEntry quantity="6.21003743853" label="6.21003743853" color="#fdc685" />
+        <ColorMapEntry quantity="6.642129189354" label="6.642129189354" color="#fdc181" />
+        <ColorMapEntry quantity="7.074198903675" label="7.074198903675" color="#fdbc7e" />
+        <ColorMapEntry quantity="7.506290654499" label="7.506290654499" color="#fdb77a" />
+        <ColorMapEntry quantity="7.938382405323" label="7.938382405323" color="#fdb276" />
+        <ColorMapEntry quantity="8.370474156147001" label="8.370474156147" color="#fdad72" />
+        <ColorMapEntry quantity="8.802565906970999" label="8.802565906971" color="#fda86e" />
+        <ColorMapEntry quantity="9.234657657794999" label="9.234657657795" color="#fda36a" />
+        <ColorMapEntry quantity="9.666749408618999" label="9.666749408619" color="#fd9e66" />
+        <ColorMapEntry quantity="10.09881912294" label="10.09881912294" color="#fd9962" />
+        <ColorMapEntry quantity="10.530910873764" label="10.530910873764" color="#fd945f" />
+        <ColorMapEntry quantity="10.963002624588" label="10.963002624588" color="#fd905b" />
+        <ColorMapEntry quantity="11.395094375412" label="11.395094375412" color="#fc8a57" />
+        <ColorMapEntry quantity="11.827186126236" label="11.827186126236" color="#fa8554" />
+        <ColorMapEntry quantity="12.25927787706" label="12.25927787706" color="#f88051" />
+        <ColorMapEntry quantity="12.691347591381" label="12.691347591381" color="#f67b4e" />
+        <ColorMapEntry quantity="13.123439342205" label="13.123439342205" color="#f4754b" />
+        <ColorMapEntry quantity="13.555531093029" label="13.555531093029" color="#f27048" />
+        <ColorMapEntry quantity="13.987622843853" label="13.987622843853" color="#f06b45" />
+        <ColorMapEntry quantity="14.419714594677" label="14.419714594677" color="#ee6542" />
+        <ColorMapEntry quantity="14.851806345501" label="14.851806345501" color="#ec603f" />
+        <ColorMapEntry quantity="15.283898096325" label="15.283898096325" color="#ea5b3c" />
+        <ColorMapEntry quantity="15.715967810646" label="15.715967810646" color="#e85639" />
+        <ColorMapEntry quantity="16.14805956147" label="16.14805956147" color="#e65036" />
+        <ColorMapEntry quantity="16.580151312294" label="16.580151312294" color="#e44b33" />
+        <ColorMapEntry quantity="17.012243063118" label="17.012243063118" color="#e14530" />
+        <ColorMapEntry quantity="17.444334813942" label="17.444334813942" color="#dd402c" />
+        <ColorMapEntry quantity="17.876426564766" label="17.876426564766" color="#d93a28" />
+        <ColorMapEntry quantity="18.308496279087" label="18.308496279087" color="#d53424" />
+        <ColorMapEntry quantity="18.740588029911" label="18.740588029911" color="#d12e20" />
+        <ColorMapEntry quantity="19.172679780735" label="19.172679780735" color="#ce281c" />
+        <ColorMapEntry quantity="19.604771531559" label="19.604771531559" color="#ca2218" />
+        <ColorMapEntry quantity="20.036863282383" label="20.036863282383" color="#c61d14" />
+        <ColorMapEntry quantity="20.468955033207" label="20.468955033207" color="#c21710" />
+        <ColorMapEntry quantity="20.901024747528" label="20.901024747528" color="#bf110c" />
+        <ColorMapEntry quantity="21.333116498352" label="21.333116498352" color="#bb0b08" />
+        <ColorMapEntry quantity="21.765208249176" label="21.765208249176" color="#b70504" />
+        <ColorMapEntry quantity="22.1973" label="22.1973" color="#b30000" />
+    </div>
+    <div id='legendVal'>
+
+    </div>
+
+    <h5>Result Image</h5>
+
+    <script>
+        var arr = [
+            "#fcfecb",
+            "#a2dbb5",
+            "#45b8c3",
+            "#2d84b9",
+            "#253c98"
+        ];
+
+        var i = 0;
+        function downloadIcon() {
+            var sts = confirm("Are you sure want to generate icon");
+            if (sts == true) {
+                generateIcon(arr[i]);
+            }
+        }
+
+
+        function generateIcon(color) {
+            const canvas = document.getElementById('legend');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = arr[i];
+            ctx.fillRect(0, 0, 32, 30);
+            let downloadLink = document.createElement('a');
+            downloadLink.setAttribute('download', 'nsis_cn' + (i + 1) + '.png');
+            let canvas2 = document.getElementById('legend');
+            canvas2.toBlob(function (blob) {
+                let url = URL.createObjectURL(blob);
+                downloadLink.setAttribute('href', url);
+                downloadLink.click();
+            });
+            i++;
+            if (i < arr.length) {
+                setTimeout(function () {
+                    generateIcon(arr[i]);
+                }, 200);
+            }
+        }
+
+
+        function generateLegendValue() {
+            var sts = confirm("Are you sure want to generate legend value");
+            $("#legendVal").html("");
+            if (sts == true) {
+                $("ColorMapEntry").each(function () {
+                    $("#legendVal").append("<div>" + $(this).attr('label') + "</div>");
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
